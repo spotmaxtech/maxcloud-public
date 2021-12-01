@@ -1,0 +1,50 @@
+apiVersion: kiali.io/v1alpha1
+kind: Kiali
+metadata:
+  name: kiali
+  namespace: spotmax-maxcloud
+  annotations:
+    ansible.sdk.operatorframework.io/verbosity: "1"
+spec:
+  istio_namespace: istio-system
+  auth:
+    strategy: anonymous
+  deployment:
+    accessible_namespaces: "**"
+    logger:
+      log_level: info
+      log_format: text
+      sampler_rate: "1"
+      time_field_format: "2006-01-02T15:04:05Z07:00"
+  external_services:
+    grafana:
+      enabled: false
+      in_cluster_url: http://grafana-svc.spotmax-maxcloud:3000
+    prometheus:
+      url: http://prometheus-kube-prometheus-prometheus.spotmax-maxcloud:9090
+    # tracing:
+    #   enabled: true
+    #   in_cluster_url: http://tracing.istio-system/jaeger
+    #   use_grpc: false
+  istio_labels:
+    app_label_name: "app"
+    injection_label_name: "istio-injection"
+    injection_label_rev:  "istio.io/rev"
+    version_label_name: "version"
+  kiali_feature_flags:
+    istio_injection_action: true
+    ui_defaults:
+      graph:
+        find_options:
+          - description: "Find: slow edges (> 1s)"
+            expression: "rt > 1000"
+          - description: "Find: unhealthy nodes"
+            expression:  "! healthy"
+          - description: "Find: unknown nodes"
+            expression:  "name = nodes"
+        hide_options:
+          - description: "Hide: healthy nodes"
+            expression: "healthy"
+          - description: "Hide: unknown nodes"
+            expression:  "name = nodes"
+
