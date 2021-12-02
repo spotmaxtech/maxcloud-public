@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: grafana-deploy
-          image: registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-grafana:8.1.0-aliyun
+          image: registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-grafana:8.2.6
           resources:
             limits:
               memory: "1024Mi"
