@@ -15,10 +15,10 @@ spec:
       containers:
         - name: grafana-deploy
           image: registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-grafana:8.2.6
-          resources:
-            limits:
-              memory: "1024Mi"
-              cpu: "100m"
+#          resources:
+#            limits:
+#              memory: "1024Mi"
+#              cpu: "500m"
           ports:
             - containerPort: 3000
 ---
