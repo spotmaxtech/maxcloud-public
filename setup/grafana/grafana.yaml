@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-deploy
+spec:
+  selector:
+    matchLabels:
+      app: grafana-deploy
+  template:
+    metadata:
+      labels:
+        app: grafana-deploy
+    spec:
+      containers:
+        - name: grafana-deploy
+          image: registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-grafana:8.2.6
+          volumeMounts:
+            - mountPath: /etc/grafana/provisioning/datasources
+              name: grafana-datasources
+              readOnly: false
+#          resources:
+#            limits:
+#              memory: "1024Mi"
+#              cpu: "500m"
+          ports:
+            - containerPort: 3000
+      volumes:
+        - name: grafana-datasources
+          secret:
+            secretName: grafana-datasources        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-svc
+spec:
+  selector:
+    app: grafana-deploy
+  ports:
+    - port: 3000
+      targetPort: 3000
