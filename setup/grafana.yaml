@@ -14,7 +14,7 @@ stringData:
                 "name": "prometheus",
                 "orgId": 1,
                 "type": "prometheus",
-                "url": "http://prometheus-server.prometheus.svc",
+                "url": "http://kube-prometheus-stack-prometheus.spotmax-maxcloud.svc:9090",
                 "version": 1
             }
         ]
