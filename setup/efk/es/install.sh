@@ -1,4 +1,4 @@
-#!/bib/bash
+#!/bin/bash
 
 namespace="spotmax-maxcloud"
 
