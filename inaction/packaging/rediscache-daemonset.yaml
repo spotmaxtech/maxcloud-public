@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: rediscache
+  namespace: leon-dev
+spec:
+  selector:
+    matchLabels:
+      app: rediscache
+  template:
+    metadata:
+      name: rediscache
+      labels:
+        app: rediscache
+    spec:
+      containers:
+        - name: redis
+          image: redis:6.2
+          command: [ "redis-server" ]
+          args: [ "--port 6379", "--save", "--maxmemory 1G", "--maxmemory-policy volatile-ttl" ]
+          ports:
+            - containerPort: 6379
