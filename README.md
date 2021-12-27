@@ -1,8 +1,5 @@
-# maxcloud-public
-Maxcloud public resource
-
-# setup
-Installing scripts
+# 说明
+常用的公共资源，包括热门组件安装脚本
 
 # AWS 常用脚本
 ## 获取AWS EKS集群的admin token
