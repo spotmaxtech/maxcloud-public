@@ -14,5 +14,5 @@ download
 knative_dir=$public_dir/setup/knative
 
 kubectl patch deployment activator --patch-file $knative_dir/patch/deployment-activator.yaml -n knative-serving
-kubectl patch deployment activator --patch-file $knative_dir/patch/deployment-autoscaler.yaml -n knative-serving
-kubectl patch deployment activator --patch-file $knative_dir/patch/deployment-autoscaler-hpa.yaml -n knative-serving
+kubectl patch deployment autoscaler --patch-file $knative_dir/patch/deployment-autoscaler.yaml -n knative-serving
+kubectl patch deployment autoscaler-hpa --patch-file $knative_dir/patch/deployment-autoscaler-hpa.yaml -n knative-serving
