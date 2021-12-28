@@ -14,14 +14,14 @@ spec:
       cpu: 0
       memory: 0
   - container: autoscaler-hpa
-      requests:
-        cpu: 0
-        memory: 0
+    requests:
+      cpu: 0
+      memory: 0
   - container: controller
-      requests:
-        cpu: 0
-        memory: 0
+    requests:
+      cpu: 0
+      memory: 0
   - container: webhook
-      requests:
-        cpu: 0
-        memory: 0
+    requests:
+      cpu: 0
+      memory: 0
