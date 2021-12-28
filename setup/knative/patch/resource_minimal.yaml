@@ -1,27 +1,14 @@
-apiVersion: operator.knative.dev/v1alpha1
-kind: KnativeServing
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: knative-serving
+  name: activator
   namespace: knative-serving
 spec:
-  resources:
-  - container: activator
-    requests:
-      cpu: 0
-      memory: 0
-  - container: autoscaler
-    requests:
-      cpu: 0
-      memory: 0
-  - container: autoscaler-hpa
-    requests:
-      cpu: 0
-      memory: 0
-  - container: controller
-    requests:
-      cpu: 0
-      memory: 0
-  - container: webhook
-    requests:
-      cpu: 0
-      memory: 0
+  template:
+    spec:
+      containers:
+        - name: activator
+          resources:
+            requests:
+              cpu: 0
+              memory: 0
