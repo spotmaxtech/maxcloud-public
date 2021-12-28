@@ -13,4 +13,4 @@ download
 
 knative_dir=$public_dir/setup/knative
 
-kubectl patch deployment activator --patch "$(cat $knative_dir/patch/resource_minimal.yaml)" -n knative-serving
+kubectl patch deployment activator --patch-file $knative_dir/patch/resource_minimal.yaml -n knative-serving
