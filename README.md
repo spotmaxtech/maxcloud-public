@@ -6,6 +6,7 @@
 ```bash
 git clone https://github.com/spotmaxtech/maxcloud_public.git
 cd maxcloud_public/setup/istio && sh install_minimal.sh
+cd -
 ```
 
 # AWS 常用脚本
