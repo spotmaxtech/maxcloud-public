@@ -13,3 +13,4 @@ download
 
 knative_dir=$public_dir/setup/knative
 
+kubectl apply -f $knative_dir/patch/resource_minimal.yaml
