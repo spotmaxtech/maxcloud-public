@@ -15,6 +15,7 @@ bash -c "$(curl -s https://raw.githubusercontent.com/spotmaxtech/maxcloud_public
 # knative install
 ## minimal install
 ```bash
+bash -c "$(curl -s https://raw.githubusercontent.com/spotmaxtech/maxcloud_public/master/setup/knative/install_minimal.sh)"
 ```
 
 
