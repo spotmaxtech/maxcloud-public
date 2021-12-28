@@ -7,6 +7,11 @@
 bash -c "$(curl -s https://raw.githubusercontent.com/spotmaxtech/maxcloud_public/master/setup/istio/install_minimal.sh)"
 ```
 
+## default install
+```bash
+bash -c "$(curl -s https://raw.githubusercontent.com/spotmaxtech/maxcloud_public/master/setup/istio/install_default.sh)"
+```
+
 # AWS 常用脚本
 ## 获取AWS EKS集群的admin token
 ```bash
