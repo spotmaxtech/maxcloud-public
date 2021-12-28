@@ -4,9 +4,7 @@
 # istio install
 ## minimal install
 ```bash
-git clone https://github.com/spotmaxtech/maxcloud_public.git
-cd maxcloud_public/setup/istio && sh install_minimal.sh
-cd -
+bash -c "$(curl -s https://raw.githubusercontent.com/spotmaxtech/maxcloud_public/master/setup/istio/install_minimal.sh)"
 ```
 
 # AWS 常用脚本
