@@ -10,6 +10,6 @@ helm install kube-prometheus-stack -f values.yaml  prometheus-community/kube-pro
 
 
 #Isito 监控数据采集
-kubectl apply -f ServiceMonitor.yaml   -n $namespace
-kubectl apply -f IstioControlPlaneMetrics.yaml   -n $namespace
-kubectl apply -f IsitoDataPlaneMetrics.yaml   -n $namespace
+kubectl apply -f ServiceMonitor.yaml
+kubectl apply -f IstioControlPlaneMetrics.yaml
+kubectl apply -f IsitoDataPlaneMetrics.yaml
