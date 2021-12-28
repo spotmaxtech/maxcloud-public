@@ -5,23 +5,23 @@ metadata:
   namespace: knative-serving
 spec:
   resources:
-    - container: activator
+  - container: activator
+    requests:
+      cpu: 0
+      memory: 0
+  - container: autoscaler
+    requests:
+      cpu: 0
+      memory: 0
+  - container: autoscaler-hpa
       requests:
         cpu: 0
         memory: 0
-    - container: autoscaler
+  - container: controller
       requests:
         cpu: 0
         memory: 0
-    - container: autoscaler-hpa
-        requests:
-          cpu: 0
-          memory: 0
-    - container: controller
-        requests:
-          cpu: 0
-          memory: 0
-    - container: webhook
-        requests:
-          cpu: 0
-          memory: 0
+  - container: webhook
+      requests:
+        cpu: 0
+        memory: 0
