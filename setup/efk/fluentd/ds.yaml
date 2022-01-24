@@ -42,13 +42,12 @@ spec:
              [
               "/var/log/containers/*_knative-serving_*",
               "/var/log/containers/*_istio-system_*",
-              "/var/log/containers/*_spotmax-maxcloud_*",
-              "/var/log/containers/fluent*"
+              "/var/log/containers/*_spotmax-maxcloud_*"
              ]
-          #- name: FLUENT_CONTAINER_TAIL_PARSER_TYPE
-          #  value: /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)$/
-          #- name: FLUENT_CONTAINER_TAIL_PARSER_TIME_FORMAT
-          #  value: '%Y-%m-%dT%H:%M:%S.%N%:z'
+          - name: FLUENT_CONTAINER_TAIL_PARSER_TYPE
+            value: /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)$/
+          - name: FLUENT_CONTAINER_TAIL_PARSER_TIME_FORMAT
+            value: '%Y-%m-%dT%H:%M:%S.%N%:z'
           #- name: FLUENT_ELASTICSEARCH_ENABLE_ILM
           #  value: 'true'
           - name: FLUENT_ELASTICSEARCH_USER
