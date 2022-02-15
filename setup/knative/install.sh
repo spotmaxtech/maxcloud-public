@@ -31,4 +31,43 @@ kubectl patch cm config-network -n knative-serving -p '{"data":{"domainTemplate"
 
 # istio auto-injection
 kubectl label namespace knative-serving istio-injection=enabled --overwrite
-echo 'install knative end'
+
+# set domain
+diyDomain() {
+    while [ -z "$domain" ]; do
+        echo ""
+        echo "域名格式参照：\"spotmaxtech.com\""
+        read -p "请输入自定义域名：" domain
+    done
+    kubectl patch configmap/config-domain -n knative-serving --type merge -p "{\"data\":{\"$domain\":\"\"}}"
+    if [ $? -ne 0 ]; then
+        echo "设置域名失败，请重检查输入正确域名后重试"
+        domain=""
+        diyDomain
+    fi
+
+    echo "domain: $domain"
+}
+
+domain() {
+    echo "如果使用默认域名请输入\"Y\""
+    echo "如果需要自定义域名请输入\"N\""
+    echo ""
+    read -r -p "use default domain? [Y/n] " input
+    case $input in
+        [yY][eE][sS]|[yY])
+            # default-domain
+            echo "默认域名"
+            kubectl apply -f $knative_dir/serving-default-domain.yaml
+            ;;
+        [nN][oO]|[nN])
+            diyDomain
+            ;;
+        *)
+            echo "Invalid input..."
+            domain
+            ;;
+    esac
+}
+
+domain
