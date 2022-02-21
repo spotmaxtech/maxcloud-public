@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:  kiali-proxy
+  name:  kibana-proxy
   labels:
-    app:  kiali-proxy
+    app:  kibana-proxy
 spec:
   selector:
     matchLabels:
-      app: kiali-proxy
+      app: kibana-proxy
   replicas: 1
   strategy:
     rollingUpdate:
@@ -17,10 +17,10 @@ spec:
   template:
     metadata:
       labels:
-        app:  kiali-proxy
+        app:  kibana-proxy
     spec:
       containers:
-      - name:  kiali-proxy
+      - name:  kibana-proxy
         image:  registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-proxy:v2
         resources:
           requests:
@@ -31,21 +31,11 @@ spec:
             memory: 100Mi
         env:
           - name: TARGET_URL
-            value: kiali.spotmax-maxcloud:20001
+            value: kibana-kibana:5601
+          - name: AUTH_NAMW
+            value: 'elastic'
+          - name: AUTH_PASSWORD
+            value: 'elastic'
         ports:
         - containerPort:  8080
-          name:  kiali-proxy
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: kiali-proxy-svc
-spec:
-  selector:
-    app: kiali-proxy
-  type: LoadBalancer
-  ports:
-  - name: kiali-proxy-svc
-    protocol: TCP
-    port: 8080
-    targetPort: 8080
+          name:  kibana-proxy
