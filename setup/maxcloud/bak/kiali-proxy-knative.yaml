@@ -1,0 +1,35 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  labels: {}
+  name: kiali-proxy
+  namespace: spotmax-maxcloud
+status: {}
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+        autoscaling.knative.dev/maxScale: '5'
+        autoscaling.knative.dev/metric: concurrency
+        autoscaling.knative.dev/minScale: '1'
+        autoscaling.knative.dev/target: '200'
+      name: ''
+    spec:
+      containers:
+        - image: 'registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-proxy:latest'
+          name: maxcloud-proxy
+          env:
+            - name: TARGET_URL
+              value: kiali.spotmax-maxcloud:20001
+          ports:
+            - containerPort: 8080
+              name: http1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+  traffic:
+    - revisionName: ''
+      percent: 100
+      latestRevision: true

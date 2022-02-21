@@ -1,35 +1,51 @@
-apiVersion: serving.knative.dev/v1
-kind: Service
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  labels: {}
-  name: tracing-proxy
-  namespace: spotmax-maxcloud
-status: {}
+  name:  jeager-proxy
+  labels:
+    app:  jeager-proxy
 spec:
+  selector:
+    matchLabels:
+      app: jeager-proxy
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
-      annotations:
-        autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
-        autoscaling.knative.dev/maxScale: '5'
-        autoscaling.knative.dev/metric: concurrency
-        autoscaling.knative.dev/minScale: '1'
-        autoscaling.knative.dev/target: '200'
-      name: ''
+      labels:
+        app:  jeager-proxy
     spec:
       containers:
-        - image: 'registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-proxy:latest'
-          name: maxcloud-proxy
-          env:
-            - name: TARGET_URL
-              value: tracing.istio-system:80
-          ports:
-            - containerPort: 8080
-              name: http1
-          resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
-  traffic:
-    - revisionName: ''
-      percent: 100
-      latestRevision: true
+      - name:  jeager-proxy
+        image:  registry.cn-hongkong.aliyuncs.com/spotmax/maxcloud-proxy:v2
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        env:
+          - name: TARGET_URL
+            value: tracing.istio-system:80
+        ports:
+        - containerPort:  8080
+          name:  jeager-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jeager-proxy-svc
+spec:
+  selector:
+    app: jeager-proxy
+  type: LoadBalancer
+  ports:
+  - name: jeager-proxy-svc
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
