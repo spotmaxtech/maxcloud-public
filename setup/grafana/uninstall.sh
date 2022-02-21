@@ -13,11 +13,8 @@ download
 
 grafana_dir=$public_dir/setup/grafana_dir
 
-#配置grafana数据源  [请参照正确的prometheus svc地址]
-kubectl apply -f $grafana_dir/grafana-datasource.yaml
-
-#安装
-kubectl apply -f $grafana_dir/grafana.yaml
-kubectl apply -f $grafana_dir/grafana-proxy.yaml
+kubectl delete -f $grafana_dir/grafana-datasource.yaml
+kubectl delete -f $grafana_dir/grafana.yaml
+kubectl delete -f $grafana_dir/grafana-proxy.yaml
 
 
