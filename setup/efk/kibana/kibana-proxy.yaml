@@ -39,3 +39,17 @@ spec:
         ports:
         - containerPort:  8080
           name:  kibana-proxy
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kibana-proxy-svc
+spec:
+  selector:
+    app: kibana-proxy
+  type: LoadBalancer
+  ports:
+  - name: kibana-proxy-svc
+    protocol: TCP
+    port: 8080
+    targetPort: 8080
